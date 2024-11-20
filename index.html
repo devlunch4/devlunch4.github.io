@@ -9,18 +9,47 @@
     <!-- google adsense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6137111152569391"
      crossorigin="anonymous"></script>
+
+    <style>
+        /* 기본 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .menu {
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
     <p>Hello, devlunch4's World!</p>
     <p>Click the link below to open the page:</p>
     
-    <p>
-        1. <a href="https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/" target="_self">Take_List/Todo_List</a>
-        <br>
-        2. <a href="https://devlunch4.github.io/utility/counting_korean_characters.html" target="_self">Counting_Korean_Characters</a>
-    </p>    
+    <div class="menu">
+        <p>1. <a href="https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/" onclick="loadPage(event, 'https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/')">Take_List/Todo_List</a></p>
+        <p>2. <a href="https://devlunch4.github.io/utility/counting_korean_characters.html" onclick="loadPage(event, 'https://devlunch4.github.io/utility/counting_korean_characters.html')">Counting_Korean_Characters</a></p>
     </div>
+
+    <!-- 이곳에 링크된 웹페이지가 표시됩니다 -->
+    <div id="page-container">
+        <iframe id="page-iframe" src=""></iframe>
+    </div>
+
+    <script>
+        // 페이지를 iframe에 로드하는 함수
+        function loadPage(event, url) {
+            event.preventDefault(); // 링크의 기본 동작 방지 (새로고침 방지)
+            document.getElementById('page-iframe').src = url; // iframe에 새로운 URL 로드
+        }
+    </script>
 </body>
 
 </html>
