@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
     <!-- GoogleAnalytics - END -->
 
-     <style>
+    <style>
         /* Basic styles */
         body {
             font-family: Arial, sans-serif;
@@ -22,7 +22,8 @@
             margin-bottom: 20px;
         }
 
-        select, option {
+        select,
+        option {
             font-size: 1em;
             margin: 10px 0;
         }
@@ -33,6 +34,10 @@
             /* Adjust to fit the browser viewport height */
             border: none;
         }
+
+        .button-group {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -41,13 +46,14 @@
     <p>Click the dropdown menu below to open the page:</p>
 
     <div class="menu">
-        <select id="page-select" onchange="loadPageFromSelect(event)">
+        <select id="page-select">
             <option value="">--Select a Page--</option>
-            <option value="https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/">Take_List/Todo_List</option>
-            <option value="https://devlunch4.github.io/utility/counting_korean_characters.html">Counting_Korean_Characters</option>
-            <option value="https://devlunch4.github.io/nomadcoders_javascript-for-beginners/">nomadcoders_javascript-for-beginners</option>
-            <option value="https://devlunch4.github.io/utility/text-to-excel-with-delimiter.html">text-to-excel-with-delimiter</option>
         </select>
+    </div>
+
+    <div class="button-group">
+        <button onclick="loadPageInIframe()">Open in Iframe</button>
+        <button onclick="openInNewTab()">Open in New Tab</button>
     </div>
 
     <!-- The linked webpage will be displayed here -->
@@ -56,13 +62,45 @@
     </div>
 
     <script>
-        // Function to load the page into the iframe from the dropdown
-        function loadPageFromSelect(event) {
-            const url = event.target.value;
-            if (url) {
-                document.getElementById('page-iframe').src = url; // Load new URL into iframe
+        const pages = [
+            { url: "https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/", title: "Take_List/Todo_List" },
+            { url: "https://devlunch4.github.io/utility/counting_korean_characters.html", title: "Counting_Korean_Characters" },
+            { url: "https://devlunch4.github.io/nomadcoders_javascript-for-beginners/", title: "nomadcoders_javascript-for-beginners" },
+            { url: "https://devlunch4.github.io/utility/text-to-excel-with-delimiter.html", title: "text-to-excel-with-delimiter" }
+        ];
+
+        const pageSelect = document.getElementById('page-select');
+
+        // Populate the dropdown list with pages and auto-number them
+        pages.forEach((page, index) => {
+            const option = document.createElement('option');
+            option.value = page.url;
+            option.textContent = `${index + 1}. ${page.title}`; // Add index+1 for numbering
+            pageSelect.appendChild(option);
+        });
+
+        let selectedUrl = "";
+
+        // Update the selected URL when the dropdown value changes
+        pageSelect.addEventListener('change', function (event) {
+            selectedUrl = event.target.value;
+        });
+
+        // Function to load the page into the iframe
+        function loadPageInIframe() {
+            if (selectedUrl) {
+                document.getElementById('page-iframe').src = selectedUrl; // Load new URL into iframe
             } else {
-                document.getElementById('page-iframe').src = ''; // Clear iframe if no selection
+                alert('Please select a page from the dropdown.');
+            }
+        }
+
+        // Function to open the page in a new tab
+        function openInNewTab() {
+            if (selectedUrl) {
+                window.open(selectedUrl, '_blank'); // Open URL in new tab
+            } else {
+                alert('Please select a page from the dropdown.');
             }
         }
     </script>
