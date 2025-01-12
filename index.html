@@ -22,91 +22,122 @@
             margin-bottom: 20px;
         }
 
-        iframe {
+        .accordion {
+            cursor: pointer;
+            padding: 10px;
             width: 100%;
-            height: 100vh;
-            /* Adjust to fit the browser viewport height */
+            text-align: left;
             border: none;
+            background-color: #f1f1f1;
+            font-size: 18px;
+        }
+
+        .active,
+        .accordion:hover {
+            background-color: #ddd;
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #f1f1f1;
+        }
+
+        .panel a {
+            display: block;
+            padding: 8px;
+            color: black;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .panel a:hover {
+            background-color: #ddd;
         }
     </style>
 </head>
 
 <body>
-    <p>Hello, devlunch4's World!</p>
-    <p>Click the link below to open the page:</p>
+    <h2>Hello, devlunch4's World!</h2>
+    <p>Click the links below to open the pages in the iframe or a new tab:</p>
 
     <div class="menu">
-        <ol>
-            <li>
-                <a href="https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/"
-                    onclick="loadPage(event, 'https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/')">
-                    Take_List/Todo_List
-                </a>
-                <br>
-                <a href="https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/"
-                    target="_blank" style="font-size: 0.8em;">
-                    [Open in New Tab]
-                </a>
-            </li>
-
-            <br>
-
-            <li>
-                <a href="https://devlunch4.github.io/utility/counting_korean_characters.html"
-                    onclick="loadPage(event, 'https://devlunch4.github.io/utility/counting_korean_characters.html')">
-                    Counting_Korean_Characters
-                </a>
-                <br>
-                <a href="https://devlunch4.github.io/utility/counting_korean_characters.html" target="_blank"
-                    style="font-size: 0.8em;">
-                    [Open in New Tab]
-                </a>
-            </li>
-
-            <br>
-
-            <li>
-                <a href="https://devlunch4.github.io/nomadcoders_javascript-for-beginners/"
-                    onclick="loadPage(event, 'https://devlunch4.github.io/nomadcoders_javascript-for-beginners/')">
-                    nomadcoders_javascript-for-beginners
-                </a>
-                <br>
-                <a href="https://devlunch4.github.io/nomadcoders_javascript-for-beginners/" target="_blank"
-                    style="font-size: 0.8em;">
-                    [Open in New Tab]
-                </a>
-            </li>
-
-            <br>
-
-            <li>
-                <a href="https://devlunch4.github.io/utility/text-to-excel-with-delimiter.html"
-                    onclick="loadPage(event, 'https://devlunch4.github.io/utility/text-to-excel-with-delimiter.html')">
-                    text-to-excel-with-delimiter
-                </a>
-                <br>
-                <a href="https://devlunch4.github.io/utility/text-to-excel-with-delimiter.html" target="_blank"
-                    style="font-size: 0.8em;">
-                    [Open in New Tab]
-                </a>
-            </li>
-
-
-        </ol>
+        <!-- Accordion items generated dynamically from the script -->
     </div>
-
 
     <!-- The linked webpage will be displayed here -->
     <div id="page-container">
-        <iframe id="page-iframe" src=""></iframe>
+        <iframe id="page-iframe" src="" width="100%" height="100vh" style="border:none;"></iframe>
     </div>
 
     <script>
-        // Function to load the page into the iframe
-        function loadPage(event, url) {
-            event.preventDefault(); // Prevent default link behavior (no refresh)
-            document.getElementById('page-iframe').src = url; // Load new URL into iframe
+        // Data structure to hold menu items (easily updatable)
+        const menuItems = [
+            {
+                title: "Take_List/Todo_List",
+                url: "https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/"
+            },
+            {
+                title: "Counting_Korean_Characters",
+                url: "https://devlunch4.github.io/utility/counting_korean_characters.html"
+            },
+            {
+                title: "nomadcoders_javascript-for-beginners",
+                url: "https://devlunch4.github.io/nomadcoders_javascript-for-beginners/"
+            },
+            {
+                title: "text-to-excel-with-delimiter",
+                url: "https://devlunch4.github.io/utility/text-to-excel-with-delimiter.html"
+            }
+        ];
+
+        // Function to dynamically generate accordion menu items
+        function generateMenu() {
+            const menuContainer = document.querySelector(".menu");
+            menuItems.forEach(item => {
+                const button = document.createElement("button");
+                button.className = "accordion";
+                button.innerHTML = item.title;
+
+                const panel = document.createElement("div");
+                panel.className = "panel";
+
+                const link = document.createElement("a");
+                link.href = item.url;
+                link.target = "_blank";
+                link.innerHTML = "[Open in New Tab]";
+
+                const iframeLink = document.createElement("a");
+                iframeLink.href = "#";
+                iframeLink.onclick = function (event) {
+                    event.preventDefault();
+                    document.getElementById('page-iframe').src = item.url; // Load page in iframe
+                };
+                iframeLink.innerHTML = "[View in Iframe]";
+
+                panel.appendChild(link);
+                panel.appendChild(iframeLink);
+
+                menuContainer.appendChild(button);
+                menuContainer.appendChild(panel);
+            });
         }
+
+        // Toggle the panel when the accordion button is clicked
+        document.addEventListener("click", function (event) {
+            if (event.target.classList.contains("accordion")) {
+                event.target.classList.toggle("active");
+                const panel = event.target.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            }
+        });
+
+        // Call the function to generate the menu
+        generateMenu();
     </script>
 </body>
 
