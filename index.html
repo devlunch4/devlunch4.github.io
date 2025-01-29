@@ -39,7 +39,7 @@
             margin-top: 10px;
         }
 
-           /* Enlarged button styles */
+        /* Enlarged button styles */
         button {
             font-size: 1.5em;
             padding: 15px 30px;
@@ -64,8 +64,9 @@
     </div>
 
     <div class="button-group">
-<!--         <button onclick="loadPageInIframe()">Open in Iframe</button> -->
+        <!--         <button onclick="loadPageInIframe()">Open in Iframe</button> -->
         <button onclick="openInNewTab()">Open in New Tab</button>
+        <button onclick="openInNewWindow()">Open in New Window</button>
         <hr>
     </div>
 
@@ -90,8 +91,8 @@
             { url: "https://devlunch4.github.io/order-summary-component_frontend_mentor/index.html", title: "order-summary-component" },
             { url: "http://devlunch4.github.io/get-github-repos-web/", title: "get-github-repos-web" },
 
-            
-            
+
+
         ];
 
         const pageSelect = document.getElementById('page-select');
@@ -128,6 +129,17 @@
                 alert('Please select a page from the dropdown.');
             }
         }
+
+        // Function to open the page in a new window
+        function openInNewWindow() {
+            if (selectedUrl) {
+                // Open the URL in a new window (not a tab)
+                window.open(selectedUrl, 'newWindow', 'width=800,height=600'); // Adjust the window size as needed
+            } else {
+                alert('Please select a page from the dropdown.');
+            }
+        }
+
     </script>
 </body>
 
