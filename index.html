@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>devlunch4 Github World!</title>
 
-    <!-- GoogleAnalytics - START -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6137111152569391"
-        crossorigin="anonymous"></script>
-    <!-- GoogleAnalytics - END -->
-
     <style>
         /* Basic reset and setup */
         * {
@@ -81,25 +76,8 @@
             background-color: #0056b3;
         }
 
-        /* Iframe container */
-        #page-container {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        iframe {
-            width: 100%;
-            height: 500px; /* Fixed height for better control */
-            border: none;
-        }
-
         /* Mobile responsiveness */
         @media screen and (max-width: 600px) {
-            iframe {
-                height: 300px; /* Lower height for mobile screens */
-            }
-
             button {
                 font-size: 0.9em;
             }
@@ -121,13 +99,6 @@
         <div class="button-group">
             <button onclick="openInNewTab()">Open in New Tab</button>
             <button onclick="openInNewWindow()">Open in New Window</button>
-        </div>
-
-        <hr>
-
-        <!-- The selected webpage will be displayed here -->
-        <div id="page-container">
-            <iframe id="page-iframe" src=""></iframe>
         </div>
     </div>
 
