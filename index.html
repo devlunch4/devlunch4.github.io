@@ -12,68 +12,123 @@
     <!-- GoogleAnalytics - END -->
 
     <style>
-        /* Basic styles */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
+        /* Basic reset and setup */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: lightgray;
+        }
+
+        /* Responsive container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Menu and selector */
         .menu {
             margin-bottom: 20px;
         }
 
-        select,
-        option {
-            font-size: 1.2em;
-            margin: 10px 0;
+        select, option {
+            width: 100%;
+            font-size: 1em;
+            padding: 10px;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        /* Button group */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1 1 auto;
+            font-size: 1em;
+            padding: 10px 20px;
+            background-color: royalblue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: royalblue;
+        }
+
+        /* Iframe container */
+        #page-container {
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            overflow: hidden;
         }
 
         iframe {
             width: 100%;
-            height: 100vh;
-            /* Adjust to fit the browser viewport height */
+            height: 500px; /* Fixed height for better control */
             border: none;
         }
 
-        .button-group {
-            margin-top: 10px;
-        }
+        /* Mobile responsiveness */
+        @media screen and (max-width: 600px) {
+            iframe {
+                height: 300px; /* Lower height for mobile screens */
+            }
 
-        /* Enlarged button styles */
-        button {
-            font-size: 1.5em;
-            padding: 15px 30px;
-            margin-top: 10px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: lightgray;
+            button {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
 
 <body>
-    <p>Hello, devlunch4's World! (Updated: 2025.02.18)</p>
-    <p>Click the dropdown menu below to open the page:</p>
+    <div class="container">
+        <h1>devlunch4's Github World!</h1>
+        <p>Select a project to explore:</p>
 
-    <div class="menu">
-        <select id="page-select">
-            <option value="">--Select a Page--</option>
-        </select>
-    </div>
+        <div class="menu">
+            <select id="page-select">
+                <option value="">-- Select a Project --</option>
+            </select>
+        </div>
 
-    <div class="button-group">
-        <!--         <button onclick="loadPageInIframe()">Open in Iframe</button> -->
-        <button onclick="openInNewTab()">Open in New Tab</button>
-        <button onclick="openInNewWindow()">Open in New Window</button>
+        <div class="button-group">
+            <button onclick="openInNewTab()">Open in New Tab</button>
+            <button onclick="openInNewWindow()">Open in New Window</button>
+        </div>
+
         <hr>
-    </div>
 
-    <!-- The linked webpage will be displayed here -->
-    <div id="page-container">
-        <iframe id="page-iframe" src=""></iframe>
+        <!-- The selected webpage will be displayed here -->
+        <div id="page-container">
+            <iframe id="page-iframe" src=""></iframe>
+        </div>
     </div>
 
     <script>
@@ -88,7 +143,8 @@
             { url: "https://devlunch4.github.io/nomadcoders_javascript-for-beginners/", title: "nomadcoders_javascript-for-beginners" },
             { url: "https://devlunch4.github.io/utility/text-to-excel-with-delimiter.html", title: "text-to-excel-with-delimiter" },
             { url: "https://devlunch4.github.io/utility/normalize-line-breaks.html", title: "normalize-line-breaks" },
-            { url: "http://devlunch4.github.io/get-github-repos-web/", title: "get-github-repos-web" },
+            { url: "https://devlunch4.github.io/calc-blog-visitor.html", title: "calc-blog-visitor" },
+            { url: "https://devlunch4.github.io/get-github-repos-web/", title: "get-github-repos-web" },
 
             // free
             { url: "https://devlunch4.github.io/snake-game-js/", title: "snake-game-js" },
@@ -101,8 +157,6 @@
             { url: "https://devlunch4.github.io/results-summary-component_frontend_mentor/index.html", title: "results-summary-component" },
             { url: "https://devlunch4.github.io/product-preview-card-component_frontend_mentor/", title: "product-preview-card-component" },
             { url: "https://devlunch4.github.io/order-summary-component_frontend_mentor/index.html", title: "order-summary-component" },
-
-
         ];
 
         const pageSelect = document.getElementById('page-select');
@@ -111,7 +165,7 @@
         pages.forEach((page, index) => {
             const option = document.createElement('option');
             option.value = page.url;
-            option.textContent = `${index + 1}. ${page.title}`; // Add index+1 for numbering
+            option.textContent = `${index + 1}. ${page.title}`; 
             pageSelect.appendChild(option);
         });
 
@@ -122,34 +176,23 @@
             selectedUrl = event.target.value;
         });
 
-        // Function to load the page into the iframe
-        function loadPageInIframe() {
-            if (selectedUrl) {
-                document.getElementById('page-iframe').src = selectedUrl; // Load new URL into iframe
-            } else {
-                alert('Please select a page from the dropdown.');
-            }
-        }
-
         // Function to open the page in a new tab
         function openInNewTab() {
             if (selectedUrl) {
-                window.open(selectedUrl, '_blank'); // Open URL in new tab
+                window.open(selectedUrl, '_blank');
             } else {
-                alert('Please select a page from the dropdown.');
+                alert('Please select a project from the dropdown.');
             }
         }
 
         // Function to open the page in a new window
         function openInNewWindow() {
             if (selectedUrl) {
-                // Open the URL in a new window (not a tab)
-                window.open(selectedUrl, 'newWindow', 'width=1024,height=633'); // Adjust the window size as needed
+                window.open(selectedUrl, 'newWindow', 'width=1024,height=633'); 
             } else {
-                alert('Please select a page from the dropdown.');
+                alert('Please select a project from the dropdown.');
             }
         }
-
     </script>
 </body>
 
