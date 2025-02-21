@@ -19,22 +19,26 @@
             line-height: 1.6;
             padding: 20px;
             background-color: #f4f4f4;
+            color: #333;
         }
 
         /* Responsive container */
         .container {
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 10px;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 2.5em;
         }
 
         p {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 1.1em;
         }
 
         /* Menu and selector */
@@ -42,13 +46,15 @@
             margin-bottom: 20px;
         }
 
-        select, option {
+        select {
             width: 100%;
             font-size: 1em;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-bottom: 10px;
+            max-height: 200px;
+            overflow-y: auto;
         }
 
         /* Button group */
@@ -61,7 +67,7 @@
         }
 
         button {
-            flex: 1 1 auto;
+            min-width: 150px;
             font-size: 1em;
             padding: 10px 20px;
             background-color: #007BFF;
@@ -78,9 +84,43 @@
 
         /* Mobile responsiveness */
         @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 0.95em;
+            }
+            .container {
+                padding: 0 15px;
+            }
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
             button {
+                width: 100%;
+                max-width: 300px;
                 font-size: 0.9em;
             }
+        }
+
+        /* Footer style */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #555;
+            padding-bottom: 20px;
+        }
+
+        footer a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #0056b3;
         }
     </style>
 </head>
@@ -91,16 +131,21 @@
         <p>Select a project to explore:</p>
 
         <div class="menu">
-            <select id="page-select">
+            <select id="page-select" aria-label="Select a project">
                 <option value="">-- Select a Project --</option>
             </select>
         </div>
 
         <div class="button-group">
-            <button onclick="openInNewTab()">Open in New Tab</button>
-            <button onclick="openInNewWindow()">Open in New Window</button>
+            <button onclick="openInNewTab()" aria-label="Open project in new tab">Open in New Tab</button>
+            <button onclick="openInNewWindow()" aria-label="Open project in new window">Open in New Window</button>
         </div>
     </div>
+
+    <footer>
+        <p>© 2025 devlunch4. All rights reserved.</p>
+        <p>Contact: <a href="mailto:devlunch4@gmail.com">devlunch4@gmail.com</a></p>
+    </footer>
 
     <script>
         const pages = [
@@ -113,6 +158,7 @@
             { url: "https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/", title: "Take_List/Todo_List" },
             //
             { url: "https://devlunch4.github.io/nomadcoders_javascript-for-beginners/", title: "nomadcoders_javascript-for-beginners" },
+            
             // util sort 
             { url: "https://devlunch4.github.io/utility/calc-blog-visitor.html", title: "calc-blog-visitor" },
             { url: "https://devlunch4.github.io/utility/counting_korean_characters.html", title: "Counting_Korean_Characters" },
@@ -133,26 +179,20 @@
             { url: "https://devlunch4.github.io/product-preview-card-component_frontend_mentor/", title: "product-preview-card-component" },
             { url: "https://devlunch4.github.io/order-summary-component_frontend_mentor/index.html", title: "order-summary-component" },
         ];
-
+        
         const pageSelect = document.getElementById('page-select');
 
         // Populate the dropdown list with pages and auto-number them
         pages.forEach((page, index) => {
             const option = document.createElement('option');
             option.value = page.url;
-            option.textContent = `${index + 1}. ${page.title}`; 
+            option.textContent = `${index + 1}. ${page.title}`;
             pageSelect.appendChild(option);
-        });
-
-        let selectedUrl = "";
-
-        // Update the selected URL when the dropdown value changes
-        pageSelect.addEventListener('change', function (event) {
-            selectedUrl = event.target.value;
         });
 
         // Function to open the page in a new tab
         function openInNewTab() {
+            const selectedUrl = pageSelect.value;
             if (selectedUrl) {
                 window.open(selectedUrl, '_blank');
             } else {
@@ -162,8 +202,9 @@
 
         // Function to open the page in a new window
         function openInNewWindow() {
+            const selectedUrl = pageSelect.value;
             if (selectedUrl) {
-                window.open(selectedUrl, 'newWindow', 'width=1024,height=633'); 
+                window.open(selectedUrl, 'newWindow', 'width=1024,height=633');
             } else {
                 alert('Please select a project from the dropdown.');
             }
