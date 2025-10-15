@@ -2,171 +2,190 @@
 <html lang="en">
 
 <head>
+
     <!-- /* naver search */ -->
     <meta name="naver-site-verification" content="4d1c61cb1010fd4e567a06948e976f97eacf5c55" />
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>devlunch4 Github World!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>devlunch4 Github World</title>
+    <meta name="naver-site-verification" content="4d1c61cb1010fd4e567a06948e976f97eacf5c55" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Basic reset and setup */
+        :root {
+            --background: #f5f5f5;
+            --foreground: #171717;
+            --border: #000;
+        }
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Outfit', sans-serif;
+            background: var(--background);
+            color: var(--foreground);
             line-height: 1.6;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            padding: 1rem;
         }
 
-        /* Responsive container */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 10px;
-        }
-
-        h1 {
+        header {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 2.5em;
+            margin-bottom: 1.5rem;
         }
 
-        p {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.1em;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
         }
 
-        /* Menu and selector */
-        .menu {
-            margin-bottom: 20px;
+        .sub-title {
+            font-size: 0.9rem;
+            color: #555;
         }
 
-        select {
-            width: 100%;
-            font-size: 1em;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        /* Button group */
-        .button-group {
+        .project-grid {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        button {
-            min-width: 150px;
-            font-size: 1em;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 4px;
+        .project-card {
+            background: white;
+            border: 1px solid var(--border);
+            /* border-radius: 0.75rem; */
+            padding: 1rem 1.25rem;
+            transition: all 0.2s ease;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .project-card:hover {
+            box-shadow: -7px 7px 0 var(--border);
+            transform: translateY(-2px);
         }
 
-        /* Mobile responsiveness */
-        @media screen and (max-width: 600px) {
-            h1 {
-                font-size: 1.8em;
+        .project-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-card a {
+            display: inline-block;
+            color: var(--foreground);
+            text-decoration: none;
+            font-size: 0.9rem;
+            word-break: break-all;
+            transition: color 0.2s;
+        }
+
+        .project-card a:hover {
+            color: #555;
+            text-decoration: underline;
+        }
+
+        /* 반응형 - 넓은 화면에서 2~3열 배치 */
+        @media (min-width: 640px) {
+            .project-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 1rem;
             }
-            p {
-                font-size: 0.95em;
+
+            .project-card {
+                padding: 1.25rem 1.5rem;
             }
-            .container {
-                padding: 0 15px;
+
+            .project-card h3 {
+                font-size: 1.2rem;
             }
-            .button-group {
-                flex-direction: column;
-                align-items: center;
-            }
-            button {
-                width: 100%;
-                max-width: 300px;
-                font-size: 0.9em;
+
+            .project-card a {
+                font-size: 0.95rem;
             }
         }
 
-        /* Footer style */
         footer {
             text-align: center;
-            margin-top: 30px;
-            font-size: 0.9em;
+            margin-top: 2rem;
+            font-size: 0.85rem;
             color: #555;
-            padding-bottom: 20px;
         }
 
         footer a {
-            color: #007BFF;
+            color: var(--foreground);
             text-decoration: none;
-            transition: color 0.3s;
         }
 
-        footer a:hover {
-            color: #0056b3;
+        .portfolio-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .portfolio-btn {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--border);
+            box-shadow: -7px 7px 0 gold;
+            font-weight: 500;
+            text-decoration: none;
+            /* border-radius: 0.5rem; */
+            transition: all 0.2s ease;
+        }
+
+        .portfolio-btn:hover {
+            background: var(--border);
+            color: white;
+            box-shadow: -7px 7px 0 var(--border);
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>devlunch4's Github World!</h1>
-        <p>Select a project to explore:</p>
+    <header>
+        <h1 class="logo">devlunch4’s Github World</h1>
+        <p class="sub-title">Explore My Projects</p>
 
-        <div class="menu">
-            <select id="page-select" aria-label="Select a project">
-                <option value="">-- Select a Project --</option>
-            </select>
+        <div class="portfolio-link">
+            <a href="https://devlunch4.github.io/portfolio/" target="_blank" class="portfolio-btn">
+                LINK : Portfolio - Live Service Showcase View >>
+            </a>
         </div>
 
-        <div class="button-group">
-            <button onclick="openInNewTab()" aria-label="Open project in new tab">Open in New Tab</button>
-            <button onclick="openInNewWindow()" aria-label="Open project in new window">Open in New Window</button>
-        </div>
-    </div>
+    </header>
+
+    <main>
+        <div class="project-grid" id="projectGrid"></div>
+    </main>
 
     <footer>
-        <p>© 2025 devlunch4. All rights reserved.</p>
-        <p>Contact: <a href="mailto:devlunch4@gmail.com">devlunch4@gmail.com</a></p>
+        <p>© 2025 devlunch4 · <a href="mailto:devlunch4@gmail.com">devlunch4@gmail.com</a></p>
     </footer>
 
     <script>
         const pages = [
-            //app
+            //portfolio
+            { url: "https://devlunch4.github.io/portfolio/", title: "Portfolio - Blog List type" },
 
-
-            //
-
+            // quick
             { url: "https://quickblog-mern.vercel.app/", title: "Quick-BLOG: MERN AI BLOG - client & server" },
             { url: "https://quickai-pern-v2.vercel.app/", title: "Quick-AI: PERN AI IMAGE - client & server" },
             { url: "https://quickstay-cli-srv-frontend.vercel.app/", title: "Quick-Stay: MERN HOTEL - client & server" },
+
             //
             { url: "https://trippy-react-app.web.app/", title: "trippy-react-app: Frontend" },
             { url: "https://weather-react-app-d391c.web.app/", title: "Weather-app" },
             { url: "https://nwitter-v2.web.app/", title: "Twitter-Clone" },
             // safe issue { url: "https://react-fb-chat-app-8d8c2.web.app/", title: "Chat-app1" },
             { url: "https://lunch-chat.web.app/", title: "Chat-app2" },
-            
+
             // Training gov Java Web Course Project
             { url: "https://github.com/devlunch4/midProject_webHotelManage", title: "TeamProject_webHotelManage_2021" },
             { url: "https://github.com/devlunch4/3TeamFinalProject", title: "TeamProject_smartFarm_2021" },
@@ -174,11 +193,11 @@
             // devlunch4 tools
             { url: "https://devlunch4.github.io/my-text-analyzer/", title: "my-text-analyzer" },
             { url: "https://devlunch4.github.io/dir2md/", title: "dir2md: Dir Tree to MD Util" },
-            
             { url: "https://devlunch4.github.io/IBM_course_Develop_an_Interactive_Task_List_Web-Page/", title: "Take_List/Todo_List" },
-            //
+
+            //no
             { url: "https://devlunch4.github.io/nomadcoders_javascript-for-beginners/", title: "nomadcoders_javascript-for-beginners" },
-            
+
             // util sort 
             { url: "https://devlunch4.github.io/utility/html-structure-analyzer.html", title: "html-structure-analyzer" },
             { url: "https://devlunch4.github.io/utility/counting_korean_characters.html", title: "Counting_Korean_Characters" },
@@ -191,59 +210,45 @@
 
             // free
             { url: "https://devlunch4.github.io/snake-game-js/", title: "snake-game-js" },
-            
+
             // nomad learn
             { url: "https://devlunch4.github.io/react-for-beginners_202501/", title: "Movie App" },
             { url: "https://play.unity.com/en/games/caee619b-0ed2-417d-b3c8-985ca023be4f/kimchi-run-by-devlunch4", title: "Unity6 Game Kimchi-Run" },
 
             //practice
             { url: "https://devlunch4.github.io/image-track-practice/index.html", title: "image-track-practice" },
-            
+
             // front mentor
             { url: "https://devlunch4.github.io/results-summary-component_frontend_mentor/index.html", title: "results-summary-component" },
             { url: "https://devlunch4.github.io/product-preview-card-component_frontend_mentor/", title: "product-preview-card-component" },
             { url: "https://devlunch4.github.io/order-summary-component_frontend_mentor/index.html", title: "order-summary-component" },
             { url: "https://devlunch4.github.io/four-card-feature-section_frontend_mentor/index.html", title: "four-card-feature-section" },
             { url: "https://devlunch4.github.io/faq-accordion_frontend_mentor/index.html", title: "faq-accordion" },
-
-
-
-
-            
-
-
-            
         ];
-        
-        const pageSelect = document.getElementById('page-select');
 
-        // Populate the dropdown list with pages and auto-number them
-        pages.forEach((page, index) => {
-            const option = document.createElement('option');
-            option.value = page.url;
-            option.textContent = `${index + 1}. ${page.title}`;
-            pageSelect.appendChild(option);
+        const grid = document.getElementById('projectGrid');
+
+        pages.forEach((p, idx) => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+        <h3>${idx + 1}. ${p.title}</h3>
+        <a href="${p.url}" target="_blank">${p.url}</a>
+    `;
+
+            // 카드 전체 클릭 시 링크로 이동
+            card.addEventListener('click', () => {
+                window.open(p.url, '_blank');
+            });
+
+            // 카드 안의 a 태그 클릭 시 중복 이벤트 방지
+            card.querySelector('a').addEventListener('click', e => {
+                e.stopPropagation();
+            });
+
+            grid.appendChild(card);
         });
 
-        // Function to open the page in a new tab
-        function openInNewTab() {
-            const selectedUrl = pageSelect.value;
-            if (selectedUrl) {
-                window.open(selectedUrl, '_blank');
-            } else {
-                alert('Please select a project from the dropdown.');
-            }
-        }
-
-        // Function to open the page in a new window
-        function openInNewWindow() {
-            const selectedUrl = pageSelect.value;
-            if (selectedUrl) {
-                window.open(selectedUrl, 'newWindow', 'width=1024,height=633');
-            } else {
-                alert('Please select a project from the dropdown.');
-            }
-        }
     </script>
 </body>
 
